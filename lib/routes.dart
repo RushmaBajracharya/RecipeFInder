@@ -23,7 +23,7 @@ class GetRoutes {
     ),
     GetPage(
       name: GetRoutes.home,
-      page: () => HomeScreen(),
+      page: () => const HomeScreen(),
     ),
     GetPage(
       name: GetRoutes.detail,

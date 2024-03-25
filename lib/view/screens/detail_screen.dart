@@ -14,10 +14,12 @@ class _DetailScreenState extends State<DetailScreen> {
     final recipe = Get.arguments;
 
     return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        child: Scaffold(
+            body: Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Expanded(
+          child: ListView(
             children: [
               SizedBox(
                 width: double.infinity,
@@ -53,19 +55,26 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      recipe['recipeName'],
+                      style: const TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    const Divider(),
                     const Text(
                       'Ingredients:',
                       style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
-                    Divider(),
+                    const Divider(),
                     const SizedBox(height: 8),
                     ListView.builder(
                       shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: recipe['ingredients'].length,
                       itemBuilder: (context, index) {
                         return ListTile(
@@ -77,14 +86,15 @@ class _DetailScreenState extends State<DetailScreen> {
                     const Text(
                       'Instructions:',
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Divider(),
+                    const Divider(),
                     const SizedBox(height: 8),
                     ListView.builder(
                       shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: recipe['instructions'].length,
                       itemBuilder: (context, index) {
                         return ListTile(
@@ -100,7 +110,7 @@ class _DetailScreenState extends State<DetailScreen> {
             ],
           ),
         ),
-      ),
-    );
+      ]),
+    )));
   }
 }
