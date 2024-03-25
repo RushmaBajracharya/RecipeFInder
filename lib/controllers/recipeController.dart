@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 // class RecipeController extends GetxController {
 //   var recipes = <Recipes>[].obs;
@@ -55,22 +56,24 @@ class RecipeController extends GetxController {
   String jsonString = '';
   List recipes = [].obs;
 
+  List recipeId = [].obs;
   List recipeNames = [].obs;
 
   List recipesIngredients = [].obs;
   List recipeImage = [].obs;
   List recipeInstructions = [].obs;
   List recipesUrl = [].obs;
-  var favoriteStatus = <bool>[].obs;
+  // var favoriteStatus = <bool>[].obs;
 
   Future<void> getRecipes() async {
     String uri = 'https://dummyjson.com/recipes';
+
     try {
       var response = await http.get(Uri.parse(uri));
       Map temp = jsonDecode(response.body);
       isLoading.value = false;
       recipes = temp['recipes'];
-
+      recipeId = recipes.map((recipe) => recipe['id']).toList();
       recipeNames = recipes.map((recipe) => recipe['name']).toList();
 
       recipesIngredients =
@@ -87,8 +90,8 @@ class RecipeController extends GetxController {
   }
 
   // Function to toggle favorite status
-  void toggleFavoriteStatus(int index) {
-    favoriteStatus[index] = !favoriteStatus[index];
-    update();
-  }
+  // void toggleFavoriteStatus(int index) {
+  //   favoriteStatus[index] = !favoriteStatus[index];
+  //   update();
+  // }
 }

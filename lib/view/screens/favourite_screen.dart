@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:recipe_finder/controllers/fav_recipe_controller.dart';
 import 'package:recipe_finder/routes.dart';
 import 'package:recipe_finder/utils/colors.dart';
 
@@ -11,6 +12,17 @@ class FavouriteScreen extends StatefulWidget {
 }
 
 class _FavouriteScreenState extends State<FavouriteScreen> {
+  final FavRecipeController favRecipeController =
+      Get.find<FavRecipeController>();
+  // final RecipeController recipeController = Get.find<RecipeController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    favRecipeController.getRecipesByFavorites();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -60,8 +72,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                             crossAxisSpacing: 10.0,
                             mainAxisSpacing: 10.0,
                             mainAxisExtent: 230),
-                    itemCount: 10,
+                    itemCount: favRecipeController.favRecipeIds.length,
                     itemBuilder: (BuildContext context, int index) {
+                      print("favRecipe: ${favRecipeController.favRecipeIds}");
                       return GestureDetector(
                         onTap: () {
                           Get.toNamed(GetRoutes.detail);
