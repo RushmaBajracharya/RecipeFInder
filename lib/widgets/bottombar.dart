@@ -13,7 +13,7 @@ class BottomBar extends StatelessWidget {
       body: Obx(() {
         switch (controller.currentIndex.value) {
           case 0:
-            return const HomeScreen();
+            return HomeScreen();
           case 1:
             return const FavouriteScreen();
           default:
